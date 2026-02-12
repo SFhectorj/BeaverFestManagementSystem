@@ -1,0 +1,15 @@
+{
+  "name": "music-festival-app",
+  "version": "1.0.0",
+  "description": "Music Festival Database Interface",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-handlebars": "^7.1.2",
+    "mysql": "^2.18.1"
+  }
+}
