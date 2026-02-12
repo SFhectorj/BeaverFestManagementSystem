@@ -1,0 +1,59 @@
+<h1>Manage Sponsors</h1>
+
+<div id="browse">
+    <table border="1" cellpadding="5">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Sponsor Name</th>
+                <th>Contact Name</th>
+                <th>ContactEmail</th>
+                <th>Phone</th>
+                <th>Industry</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each data}}
+            <tr>
+                <td>{{this.sponsorId}}</td>
+                <td>{{this.sponsorName}}</td>
+                <td>{{this.contactName}}</td>
+                <td>{{this.contactEmail}}</td>
+                <td>{{this.phone}}</td>
+                <td>{{this.industry}}</td>
+                <td>
+                    <button>Delete</button>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <p>&nbsp;</p>
+</div>
+
+<div id="insert">
+    <h2>Add a New Sponsor</h2>
+    <form id="add-sponsor-form" method="POST" action="/add-sponsor-form">
+        <fieldset>
+            <legend>Sponsor Details</legend>
+            
+            <label for="input-sponsorName">Sponsor Name: </label>
+            <input type="text" name="input-sponsorName" id="input-sponsorName" required>
+
+            <label for="input-contactName">Contact Name: </label>
+            <input type="text" name="input-contactName" id="input-contactName">
+
+            <label for="input-contactEmail">Contact Email: </label>
+            <input type="email" name="input-contactEmail" id="input-contactEmail">
+
+            <label for="input-phone">Phone: </label>
+            <input type="tel" name="input-phone" id="input-phone">
+
+            <label for="input-industry">Industry: </label>
+            <input type="text" name="input-industry" id="input-industry">
+
+            <input type="submit" value="Add Sponsor">
+        </fieldset>
+    </form>
+</div>

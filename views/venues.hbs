@@ -8,6 +8,7 @@
                 <th>Venue Name</th>
                 <th>Capacity</th>
                 <th>Type</th>
+                <th>Location Description</th>
                 <th>Manager</th>
                 <th>Sponsor</th>
                 <th>Actions</th>
@@ -20,6 +21,7 @@
                 <td>{{this.venueName}}</td>
                 <td>{{this.capacity}}</td>
                 <td>{{this.type}}</td>
+                <td>{{this.locationDescription}}</td>
                 <td>{{this.managerName}}</td> <td>{{this.sponsorName}}</td> <td>
                     <button>Delete</button>
                 </td>
@@ -47,6 +49,9 @@
                 <option value="Stage">Stage</option>
                 <option value="Booth">Booth</option>
             </select>
+
+            <label for="input-locationDescription">Location Description: </label>
+            <input type="text" name="input-locationDescription" id="input-locationDescription">
 
             <label for="input-manager">Manager: </label>
             <select name="input-manager" id="input-manager" required>

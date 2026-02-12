@@ -19,7 +19,7 @@
                 <td>{{this.performanceId}}</td>
                 <td>{{this.bandName}}</td>   <td>{{this.venueName}}</td>  <td>{{this.performanceDate}}</td>
                 <td>{{this.startTime}}</td>
-                <td>{{this.duration}}</td>
+                <td>{{this.durationMinutes}}</td>
                 <td>
                     <button>Delete</button>
                 </td>
@@ -58,8 +58,8 @@
             <label for="input-time">Start Time: </label>
             <input type="time" name="input-time" id="input-time" required>
 
-            <label for="input-duration">Duration (minutes): </label>
-            <input type="number" name="input-duration" id="input-duration">
+            <label for="input-durationMinutes">Duration (minutes): </label>
+            <input type="number" name="input-durationMinutes" id="input-durationMinutes">
 
             <input type="submit" value="Add Performance">
         </fieldset>

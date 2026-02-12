@@ -1,0 +1,67 @@
+<h1>Manage Managers</h1>
+
+<div id="browse">
+    <table border="1" cellpadding="5">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>role</th>
+                <th>isActive</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each data}}
+            <tr>
+                <td>{{this.managerId}}</td>
+                <td>{{this.firstName}}</td>
+                <td>{{this.lastName}}</td>
+                <td>{{this.email}}</td>
+                <td>{{this.phone}}</td>
+                <td>{{this.role}}</td>
+                <td>{{this.isActive}}</td>
+                <td>
+                    <button>Delete</button>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <p>&nbsp;</p>
+</div>
+
+<div id="insert">
+    <h2>Add a New Manager</h2>
+    <form id="add-manager-form" method="POST" action="/add-manager-form">
+        <fieldset>
+            <legend>Manager Details</legend>
+            
+            <label for="input-fname">First Name: </label>
+            <input type="text" name="input-fname" id="input-fname" required>
+
+            <label for="input-lname">Last Name: </label>
+            <input type="text" name="input-lname" id="input-lname" required>
+
+            <label for="input-email">Email: </label>
+            <input type="email" name="input-email" id="input-email" required>
+
+            <label for="input-phone">Phone: </label>
+            <input type="tel" name="input-phone" id="input-phone">
+
+            <label for="input-role">Role: </label>
+            <input type="text" name="input-role" id="input-role">
+
+            <label for="input-isActive">Is Active: </label>
+            <select name="input-isActive" id="input-isActive">
+                <option value="true">True</option>
+                <option value="false">False</option>
+            </select>
+
+            <input type="submit" value="Add Manager">
+        </fieldset>
+    </form>
+</div>

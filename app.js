@@ -120,13 +120,23 @@ app.get('/performances', function(req, res)
 // 5. Managers Page
 app.get('/managers', function(req, res)
     {
-        res.render('managers');
+        let query1 = "SELECT * FROM Managers;";               // Define our query
+
+        db.pool.query(query1, function(error, rows, fields){    // Execute the query
+
+            res.render('managers', {data: rows});               // Render the managers.hbs file, and also send the renderer
+        })                                                      // an object where 'data' is equal to the 'rows' we received
     });
 
 // 6. Sponsors Page
 app.get('/sponsors', function(req, res)
     {
-        res.render('sponsors');
+        let query1 = "SELECT * FROM Sponsors;";               // Define our query
+
+        db.pool.query(query1, function(error, rows, fields){    // Execute the query
+
+            res.render('sponsors', {data: rows});               // Render the sponsors.hbs file, and also send the renderer
+        })                                                      // an object where 'data' is equal to the 'rows' we received
     });
 
 /*
