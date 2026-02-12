@@ -1,0 +1,67 @@
+<h1>Manage Performances</h1>
+
+<div id="browse">
+    <table border="1" cellpadding="5">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Band</th>
+                <th>Venue</th>
+                <th>Date</th>
+                <th>Start Time</th>
+                <th>Duration (min)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each performances}}
+            <tr>
+                <td>{{this.performanceId}}</td>
+                <td>{{this.bandName}}</td>   <td>{{this.venueName}}</td>  <td>{{this.performanceDate}}</td>
+                <td>{{this.startTime}}</td>
+                <td>{{this.duration}}</td>
+                <td>
+                    <button>Delete</button>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <p>&nbsp;</p>
+</div>
+
+<div id="insert">
+    <h2>Schedule a New Performance</h2>
+    <form id="add-performance-form" method="POST" action="/add-performance-form">
+        <fieldset>
+            <legend>Performance Details</legend>
+            
+            <label for="input-band">Band: </label>
+            <select name="input-band" id="input-band" required>
+                <option value="">Select a Band</option>
+                {{#each bands}}
+                <option value="{{this.bandId}}">{{this.bandName}}</option>
+                {{/each}}
+            </select>
+
+            <label for="input-venue">Venue: </label>
+            <select name="input-venue" id="input-venue" required>
+                <option value="">Select a Venue</option>
+                {{#each venues}}
+                <option value="{{this.venueId}}">{{this.venueName}}</option>
+                {{/each}}
+            </select>
+
+            <label for="input-date">Date: </label>
+            <input type="date" name="input-date" id="input-date" required>
+
+            <label for="input-time">Start Time: </label>
+            <input type="time" name="input-time" id="input-time" required>
+
+            <label for="input-duration">Duration (minutes): </label>
+            <input type="number" name="input-duration" id="input-duration">
+
+            <input type="submit" value="Add Performance">
+        </fieldset>
+    </form>
+</div>
