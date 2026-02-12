@@ -20,7 +20,7 @@
                 <td>{{this.venueId}}</td>
                 <td>{{this.venueName}}</td>
                 <td>{{this.capacity}}</td>
-                <td>{{this.type}}</td>
+                <td>{{this.venueType}}</td>
                 <td>{{this.locationDescription}}</td>
                 <td>{{this.managerName}}</td> <td>{{this.sponsorName}}</td> <td>
                     <button>Delete</button>
@@ -44,10 +44,11 @@
             <label for="input-capacity">Capacity: </label>
             <input type="number" name="input-capacity" id="input-capacity" required>
 
-            <label for="input-type">Type: </label>
-            <select name="input-type" id="input-type">
+            <label for="input-venueType">Type: </label>
+            <select name="input-venueType" id="input-venueType">
                 <option value="Stage">Stage</option>
                 <option value="Booth">Booth</option>
+                <option value="Lounge">Lounge</option>
             </select>
 
             <label for="input-locationDescription">Location Description: </label>
