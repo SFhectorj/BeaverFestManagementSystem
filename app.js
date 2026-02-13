@@ -3,7 +3,7 @@
 */
 var express = require('express');   
 var app     = express();            
-var PORT    = 9124;                 // Set a port number at the top so it's easy to change in the future
+var PORT    = 4932;
 
 // Database
 var db = require('./database/db-connector');
