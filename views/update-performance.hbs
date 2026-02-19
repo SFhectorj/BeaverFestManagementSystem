@@ -1,0 +1,48 @@
+<h1>Update Performance</h1>
+<form id="update-performance-form" method="POST" action="/put-performance-form">
+    <fieldset>
+        <legend>Edit Performance Details</legend>
+        <input type="hidden" name="performanceID" value="{{performance.performanceID}}">
+        
+        <label for="input-band">Band: </label>
+        <select name="input-band" id="input-band" required>
+            <option value="">Select a Band</option>
+            {{#each bands}}
+            <option value="{{this.bandID}}">{{this.bandName}}</option>
+            {{/each}}
+        </select>
+
+        <label for="input-venue">Venue: </label>
+        <select name="input-venue" id="input-venue" required>
+            <option value="">Select a Venue</option>
+            {{#each venues}}
+            <option value="{{this.venueID}}">{{this.venueName}}</option>
+            {{/each}}
+        </select>
+
+        <label for="input-date">Date: </label>
+        <input type="date" name="input-date" id="input-date" required>
+
+        <label for="input-time">Start Time: </label>
+        <input type="time" name="input-time" id="input-time" value="{{performance.startTime}}" required>
+
+        <label for="input-durationMinutes">Duration (minutes): </label>
+        <input type="number" name="input-durationMinutes" id="input-durationMinutes" value="{{performance.durationMinutes}}">
+
+        <input type="submit" value="Save Changes">
+        <a href="/performances"><button type="button">Cancel</button></a>
+    </fieldset>
+</form>
+
+<script>
+    // Pre-select dropdowns
+    document.getElementById('input-band').value = '{{performance.bandID}}';
+    document.getElementById('input-venue').value = '{{performance.venueID}}';
+    
+    // Format the date for the HTML input (YYYY-MM-DD)
+    let rawDate = '{{performance.performanceDate}}';
+    if(rawDate) {
+        let formattedDate = new Date(rawDate).toISOString().split('T')[0];
+        document.getElementById('input-date').value = formattedDate;
+    }
+</script>

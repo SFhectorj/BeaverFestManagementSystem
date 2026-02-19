@@ -1,0 +1,32 @@
+<h1>Update Manager</h1>
+<form id="update-manager-form" method="POST" action="/put-manager-form">
+    <fieldset>
+        <legend>Edit Manager Details</legend>
+        <input type="hidden" name="managerID" value="{{manager.managerID}}">
+        
+        <label for="input-fname">First Name: </label>
+        <input type="text" name="input-fname" id="input-fname" value="{{manager.firstName}}" required>
+
+        <label for="input-lname">Last Name: </label>
+        <input type="text" name="input-lname" id="input-lname" value="{{manager.lastName}}" required>
+
+        <label for="input-email">Email: </label>
+        <input type="email" name="input-email" id="input-email" value="{{manager.email}}" required>
+
+        <label for="input-phone">Phone: </label>
+        <input type="tel" name="input-phone" id="input-phone" value="{{manager.phone}}">
+
+        <label for="input-role">Role: </label>
+        <input type="text" name="input-role" id="input-role" value="{{manager.role}}">
+
+        <label for="input-isActive">Is Active: </label>
+        <select name="input-isActive" id="input-isActive">
+            <option value="true">True</option>
+            <option value="false">False</option>
+        </select>
+
+
+        <input type="submit" value="Save Changes">
+        <a href="/managers"><button type="button">Cancel</button></a>
+    </fieldset>
+</form>

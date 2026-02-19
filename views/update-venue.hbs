@@ -1,0 +1,57 @@
+<h1>Update Venue</h1>
+
+<p>Use the form below to update the details for <strong>{{venue.venueName}}</strong>.</p>
+
+<form id="update-venue-form" method="POST" action="/put-venue-form">
+    <fieldset>
+        <legend>Edit Venue Details</legend>
+        
+        <input type="hidden" name="venueID" value="{{venue.venueID}}">
+        
+        <label for="input-venueName">Venue Name: </label>
+        <input type="text" name="input-venueName" id="input-venueName" value="{{venue.venueName}}" required>
+        
+        <label for="input-capacity">Capacity: </label>
+        <input type="number" name="input-capacity" id="input-capacity" value="{{venue.capacity}}" required>
+
+        <label for="input-venueType">Type: </label>
+        <select name="input-venueType" id="input-venueType">
+            <option value="Stage">Stage</option>
+            <option value="Booth">Booth</option>
+            <option value="Lounge">Lounge</option>
+        </select>
+
+        <label for="input-locationDescription">Location Description: </label>
+        <input type="text" name="input-locationDescription" id="input-locationDescription" value="{{venue.locationDescription}}">
+
+        <label for="input-managerName">Manager: </label>
+        <select name="input-managerName" id="input-managerName">
+            <option value="">None / Select a Manager</option>
+            {{#each managers}}
+            <option value="{{this.managerID}}">{{this.firstName}} {{this.lastName}}</option>
+            {{/each}}
+        </select>
+
+        <label for="input-sponsorName">Sponsor: </label>
+        <select name="input-sponsorName" id="input-sponsorName">
+            <option value="">None / Select a Sponsor</option>
+            {{#each sponsors}}
+            <option value="{{this.sponsorID}}">{{this.sponsorName}}</option>
+            {{/each}}
+        </select>
+
+        <input type="submit" value="Save Changes">
+        <a href="/venues"><button type="button">Cancel</button></a>
+    </fieldset>
+</form>
+
+<script>
+    // Pre-select the Venue Type
+    document.getElementById('input-venueType').value = '{{venue.venueType}}';
+    
+    // Pre-select the Manager (if one exists)
+    document.getElementById('input-managerName').value = '{{venue.managerID}}';
+    
+    // Pre-select the Sponsor (if one exists)
+    document.getElementById('input-sponsorName').value = '{{venue.sponsorID}}';
+</script>
