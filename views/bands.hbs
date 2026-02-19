@@ -14,12 +14,15 @@
         <tbody>
             {{#each data}}
             <tr>
-                <td>{{this.bandId}}</td>
+                <td>{{this.bandID}}</td>
                 <td>{{this.bandName}}</td>
                 <td>{{this.genre}}</td>
                 <td>{{this.contactEmail}}</td>
                 <td>{{this.estimatedDraw}}</td>
                 <td>
+                    <a href="/update-band/{{this.bandID}}">
+                        <button>Edit</button>
+                    </a>
                     <button>Delete</button>
                 </td>
             </tr>

@@ -139,6 +139,26 @@ app.get('/sponsors', function(req, res)
         })                                                      // an object where 'data' is equal to the 'rows' we received
     });
 
+// 7. Route to display the Update Band form
+app.get('/update-band/:id', function(req, res) {
+    // Grab the bandId from the URL parameter
+    let bandId = req.params.id;
+
+    // Query the database for this specific band
+    let query1 = "SELECT * FROM Bands WHERE bandId = ?;";
+
+    // We use [bandId] to safely insert the variable into the '?' placeholder
+    db.pool.query(query1, [bandId], function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            // Render the update-band template, passing it the single row we found
+            res.render('update-band', { band: rows[0] });
+        }
+    });
+});
+
 /*
     LISTENER
 */
