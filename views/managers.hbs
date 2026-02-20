@@ -23,7 +23,13 @@
                 <td>{{this.email}}</td>
                 <td>{{this.phone}}</td>
                 <td>{{this.role}}</td>
-                <td>{{this.isActive}}</td>
+                <td>
+                    {{#if this.isActive}}
+                        True
+                    {{else}}
+                        False
+                    {{/if}}
+                </td>
                 <td>
                     <a href="/update-manager/{{this.managerID}}"><button>Edit</button></a>
                     <button>Delete</button>

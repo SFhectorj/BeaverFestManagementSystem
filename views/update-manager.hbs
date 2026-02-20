@@ -30,3 +30,15 @@
         <a href="/managers"><button type="button">Cancel</button></a>
     </fieldset>
 </form>
+
+<script>
+    // Grab the 1 or 0 from the database
+    let activeStatus = '{{manager.isActive}}';
+    
+    // Map the number to the dropdown's string values
+    if (activeStatus === '1') {
+        document.getElementById('input-isActive').value = 'true';
+    } else {
+        document.getElementById('input-isActive').value = 'false';
+    }
+</script>
