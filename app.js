@@ -234,6 +234,36 @@ app.get('/update-sponsor/:id', function(req, res) {
     });
 });
 
+// 12. Route to Reset the Database
+app.post('/reset-db', function(req, res) {
+    let query1 = "CALL ResetDB();";
+
+    db.pool.query(query1, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            // Redirect back to the home page after resetting
+            res.redirect('/'); 
+        }
+    });
+});
+
+// 13. Route to Demo the Delete Operation
+app.post('/demo-delete', function(req, res) {
+    let query1 = "CALL DemoDeleteBand();";
+
+    db.pool.query(query1, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            // Redirect to the Bands page so you can immediately see they are gone
+            res.redirect('/bands'); 
+        }
+    });
+});
+
 /*
     LISTENER
 */
