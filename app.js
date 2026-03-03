@@ -235,8 +235,8 @@ app.get('/update-sponsor/:id', function(req, res) {
 });
 
 // 12. Route to Reset the Database
-app.post('/reset-db', function(req, res) {
-    let query1 = "CALL ResetDB();";
+app.post('/sp_reset_beaverfest', function(req, res) {
+    let query1 = "CALL sp_reset_beaverfest();";
 
     db.pool.query(query1, function(error, rows, fields) {
         if (error) {
