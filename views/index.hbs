@@ -9,3 +9,20 @@
     <li><a href="/managers"><strong>Manage Managers</strong></a> - View staff managing the venues.</li>
     <li><a href="/sponsors"><strong>Manage Sponsors</strong></a> - View corporate sponsors and contributions.</li>
 </ul>
+
+<h2>Database Administration</h2>
+<p>Use these buttons to test the database reset and delete functionality.</p>
+
+<form action="/demo-delete" method="POST" style="display: inline-block; margin-right: 10px;">
+    <button type="submit" style="background-color: #ff4d4d; color: white; padding: 10px; border: none; cursor: pointer;">
+        Demo Delete (Removes 'lil dizzy' from Bands)
+    </button>
+</form>
+
+<form action="/reset-db" method="POST" style="display: inline-block;">
+    <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px; border: none; cursor: pointer;">
+        Reset Database
+    </button>
+</form>
+
+<hr>
