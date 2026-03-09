@@ -13,6 +13,7 @@ const { engine } = require('express-handlebars');
 var exphbs = require('express-handlebars');     // Import express-handlebars
 app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
 app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
+app.use(express.urlencoded({extended: true}));  // This allows us to parse the body of POST requests
 
 /*
     ROUTES
@@ -260,6 +261,39 @@ app.post('/demo-delete', function(req, res) {
         } else {
             // Redirect to the Bands page so you can immediately see they are gone
             res.redirect('/bands'); 
+        }
+    });
+});
+
+// 14. Route to Delete a Band
+app.post('/delete-band', function(req, res) {
+    // Grab the bandID from the form submission (hidden input)
+    let bandID = req.body.bandID;
+    let query = "DELETE FROM Bands WHERE bandID = ?;";
+
+    // Execute the query
+    db.pool.query(query, [bandID], function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            // Redirect to the Bands page so you can see the updated list
+            res.redirect('/bands');
+        }
+    });
+});
+
+// 15. Route to Delete a Venue
+app.post('/delete-venue', function(req, res) {
+    let venueID = req.body.venueID;
+    let query = "DELETE FROM Venues WHERE venueID = ?;";
+
+    db.pool.query(query, [venueID], function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.redirect('/venues');
         }
     });
 });
