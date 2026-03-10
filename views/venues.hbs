@@ -64,7 +64,7 @@
             <select name="input-manager" id="input-manager" required>
                 <option value="">Select a Manager</option>
                 {{#each managers}}
-                <option value="{{this.managerId}}">{{this.firstName}} {{this.lastName}}</option>
+                <option value="{{this.managerID}}">{{this.firstName}} {{this.lastName}}</option>
                 {{/each}}
             </select>
 
@@ -72,7 +72,7 @@
             <select name="input-sponsor" id="input-sponsor" required>
                 <option value="">Select a Sponsor</option>
                 {{#each sponsors}}
-                <option value="{{this.sponsorId}}">{{this.sponsorName}}</option>
+                <option value="{{this.sponsorID}}">{{this.sponsorName}}</option>
                 {{/each}}
             </select>
 

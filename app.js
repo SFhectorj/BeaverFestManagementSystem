@@ -298,6 +298,53 @@ app.post('/delete-venue', function(req, res) {
     });
 });
 
+// 16. Route to Add a New Band
+app.post('/add-band-form', function(req, res) {
+    let data = req.body; // Get the data from the form submission
+    let query = "INSERT INTO Bands (bandName, genre, contactEmail, estimatedDraw) VALUES (?, ?, ?, ?);";
+    // We create an array of values that matches the order of the '?' placeholders in our query
+    let values = [
+        data['input-bandName'],
+        data['input-genre'],
+        data['input-email'],
+        data['input-estimatedDraw']
+    ];
+    // Execute the query, passing in the array of values to safely insert them into the query
+    db.pool.query(query, values, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.redirect('/bands');
+        }
+    });
+});
+
+//17. Route to Add a New Venue
+app.post('/add-venue-form', function(req, res) {
+    let data = req.body;
+    let managerID = data['input-manager'] === '' ? null : data['input-manager']; // Get the selected managerID from the form
+    let sponsorID = data['input-sponsor'] === '' ? null : data['input-sponsor']; // Get the selected sponsorID from the form
+    let query = "INSERT INTO Venues (venueName, capacity, venueType, locationDescription, managerID, sponsorID) VALUES (?, ?, ?, ?, ?, ?);";
+    let values = [
+        data['input-venueName'],
+        data['input-capacity'],
+        data['input-venueType'],
+        data['input-locationDescription'],
+        managerID,
+        sponsorID
+    ];
+
+    db.pool.query(query, values, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.redirect('/venues');
+        }
+    });
+});
+
 /*
     LISTENER
 */
