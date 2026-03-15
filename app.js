@@ -345,6 +345,257 @@ app.post('/add-venue-form', function(req, res) {
     });
 });
 
+//18. Route to Add a New Performance (UPDATED to use stored procedure and handle optional duration)
+app.post('/add-performance-form', function(req, res) {
+    let data = req.body;
+    let duration = data['input-durationMinutes'] === '' ? null : data['input-durationMinutes']; // Handle optional duration
+    let query = "CALL InsertPerformance(?, ?, ?, ?, ?);"; // Call the stored procedure to insert a new performance
+    //let query = "INSERT INTO Performances (bandID, venueID, performanceDate, startTime, durationMinutes) VALUES (?, ?, ?, ?, ?);";
+    let values = [
+        data['input-band'], // bandID from dropdown
+        data['input-venue'], // venueID from dropdown
+        data['input-date'],
+        data['input-time'],
+        duration
+    ];
+
+    db.pool.query(query, values, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.redirect('/performances');
+        }
+    });
+});
+
+//19. Route to Add a New Manager
+app.post('/add-manager-form', function(req, res) {
+    let data = req.body;
+    let phone = data['input-phone'] === '' ? null : data['input-phone']; // Handle optional phone
+    // Convert string "true"/"false" to 1/0 for the isActive field
+    let isActive = data['input-isActive'] === 'true' ? 1 : 0;
+    let query = "INSERT INTO Managers (firstName, lastName, email, phone, role, isActive) VALUES (?, ?, ?, ?, ?, ?);";
+    let values = [
+        data['input-fname'],
+        data['input-lname'],
+        data['input-email'],
+        phone,
+        data['input-role'],
+        isActive
+    ];
+
+    db.pool.query(query, values, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.redirect('/managers');
+        }
+    });
+});
+
+//20. Route to Add a New Sponsor
+app.post('/add-sponsor-form', function(req, res) {
+    let data = req.body;
+    let phone = data['input-phone'] === '' ? null : data['input-phone']; // Handle optional phone
+    let query = "INSERT INTO Sponsors (sponsorName, contactName, contactEmail, phone, industry) VALUES (?, ?, ?, ?, ?);";
+    let values = [
+        data['input-sponsorName'],
+        data['input-contactName'],
+        data['input-contactEmail'],
+        phone,
+        data['input-industry']
+    ];
+
+    db.pool.query(query, values, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.redirect('/sponsors');
+        }
+    });
+});
+
+//21: Route to Update an Existing Band
+app.post('/update-band-form', function(req, res) {
+    let data = req.body;
+    let bandID = data.bandID;
+
+    let query = "UPDATE Bands SET bandName = ?, genre = ?, contactEmail = ?, estimatedDraw = ? WHERE bandID = ?;";
+    let values = [
+        data['input-bandName'],
+        data['input-genre'],
+        data['input-email'],
+        data['input-estimatedDraw'],
+        bandID
+    ];
+
+    db.pool.query(query, values, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.redirect('/bands');
+        }
+    });
+});
+
+//22: Route to Update an Existing Venue
+app.post('/update-venue-form', function(req, res) {
+    let data = req.body;
+    let venueID = data.venueID;
+    // Handle NULL values for foreign keys (managerID and sponsorID) if the user left them unselected in the form
+    let managerID = data['input-manager'] === '' ? null : data['input-manager'];
+    let sponsorID = data['input-sponsor'] === '' ? null : data['input-sponsor'];
+
+    let query = "UPDATE Venues SET venueName = ?, capacity = ?, venueType = ?, locationDescription = ?, managerID = ?, sponsorID = ? WHERE venueID = ?;";
+    let values = [
+        data['input-venueName'],
+        data['input-capacity'],
+        data['input-venueType'],
+        data['input-locationDescription'],
+        managerID,
+        sponsorID,
+        venueID
+    ];
+
+    db.pool.query(query, values, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.redirect('/venues');
+        }
+    });
+});
+
+//23: Route to Update an Existing Performance
+app.post('/update-performance-form', function(req, res) {
+    let data = req.body;
+    let performanceID = data.performanceID;
+    let duration = data['input-durationMinutes'] === '' ? null : data['input-durationMinutes']; // Handle optional duration
+
+    //let query = "UPDATE Performances SET bandID = ?, venueID = ?, performanceDate = ?, startTime = ?, durationMinutes = ? WHERE performanceID = ?;";
+    let query = "CALL UpdatePerformance(?, ?, ?, ?, ?, ?);"; // Call the stored procedure to update the performance
+    let values = [
+        performanceID, // Pass the performanceID as the first parameter to identify which performance to update
+        data['input-band'],
+        data['input-venue'],
+        data['input-date'],
+        data['input-time'],
+        duration
+    ];
+
+    db.pool.query(query, values, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.redirect('/performances');
+        }
+    });
+});
+
+//24: Route to Update an Exisisting Manager
+app.post('/update-manager-form', function(req, res) {
+    let data = req.body;
+    let managerID = data.managerID;
+    let phone = data['input-phone'] === '' ? null : data['input-phone']; // Handle optional phone
+    let isActive = data['input-isActive'] === 'true' ? 1 : 0; // Convert string to boolean
+
+    let query = "UPDATE Managers SET firstName = ?, lastName = ?, email = ?, phone = ?, role = ?, isActive = ? WHERE managerID = ?;";
+    let values = [
+        data['input-fname'],
+        data['input-lname'],
+        data['input-email'],
+        phone,
+        data['input-role'],
+        isActive,
+        managerID
+    ];
+
+    db.pool.query(query, values, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.redirect('/managers');
+        }
+    });
+});
+
+//25: Route to Update an Existing Sponsor
+app.post('/update-sponsor-form', function(req, res) {
+    let data = req.body;
+    let sponsorID = data.sponsorID;
+    let phone = data['input-phone'] === '' ? null : data['input-phone']; // Handle optional phone
+
+    let query = "UPDATE Sponsors SET sponsorName = ?, contactName = ?, contactEmail = ?, phone = ?, industry = ? WHERE sponsorID = ?;";
+    let values = [
+        data['input-sponsorName'],
+        data['input-contactName'],
+        data['input-contactEmail'],
+        phone,
+        data['input-industry'],
+        sponsorID
+    ];
+
+    db.pool.query(query, values, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.redirect('/sponsors');
+        }
+    });
+});
+
+//26: Route to Delete a Performance
+app.post('/delete-performance', function(req, res) {
+    let performanceID = req.body.performanceID;
+    let query = "CALL DeletePerformance(?);"; // Call the stored procedure to delete the performance
+
+    db.pool.query(query, [performanceID], function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.redirect('/performances');
+        }
+    });
+});
+
+//27. Route to Delete a Manager
+app.post('/delete-manager', function(req, res) {
+    let managerID = req.body.managerID;
+    let query = "DELETE FROM Managers WHERE managerID = ?;";
+
+    db.pool.query(query, [managerID], function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.redirect('/managers');
+        }
+    });
+});
+
+//28. Route to Delete a Sponsor
+app.post('/delete-sponsor', function(req, res) {
+    let sponsorID = req.body.sponsorID;
+    let query = "DELETE FROM Sponsors WHERE sponsorID = ?;";
+
+    db.pool.query(query, [sponsorID], function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.redirect('/sponsors');
+        }
+    });
+});
 /*
     LISTENER
 */
