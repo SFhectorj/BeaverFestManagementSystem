@@ -1,4 +1,17 @@
 /*
+Citation for this file:
+Date Retrieved: February 10, 2026
+Adapted From: CS340 Starter Application
+Type: Source Code
+Author: Oregon State University CS340 Course Staff
+Source: https://canvas.oregonstate.edu
+
+Notes:
+This file was adapted from the CS340 starter application provided through
+Canvas. Additional CRUD routes and functionality were implemented by our team.
+*/
+
+/*
     WEBPAGE SETUP
 */
 var express = require('express');   
@@ -14,6 +27,7 @@ var exphbs = require('express-handlebars');     // Import express-handlebars
 app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
 app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
 app.use(express.urlencoded({extended: true}));  // This allows us to parse the body of POST requests
+app.use(express.static('public'));
 
 /*
     ROUTES
@@ -596,6 +610,7 @@ app.post('/delete-sponsor', function(req, res) {
         }
     });
 });
+
 /*
     LISTENER
 */

@@ -1,3 +1,14 @@
+{{!-- 
+/Citation for use of AI tools:
+    Date: 03/14/2026
+    Prompt used to debug and rewrite the Delete and Update routes for the performances page: 
+    [Help me debug and rewrite my Delete and Update routes for my performances page. 
+    I want to make sure that when I click the delete button, it correctly deletes the performance from the database, and when I click the edit button, it takes me to a form where I can update the performance details.]
+ *  AI Source Link: gemini.google.com
+ */
+--}}
+
+
 <h1>Manage Performances</h1>
 
 <div id="browse">
@@ -65,7 +76,7 @@
             <input type="time" name="input-time" id="input-time" required>
 
             <label for="input-durationMinutes">Duration (minutes): </label>
-            <input type="number" name="input-durationMinutes" id="input-durationMinutes">
+            <input type="number" name="input-durationMinutes" id="input-durationMinutes" required min="1">
 
             <input type="submit" value="Add Performance">
         </fieldset>

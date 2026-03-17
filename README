@@ -1,0 +1,35 @@
+BEAVER FEST MANAGMENT SYSTEM
+BY: Hector Baeza & Eddie Dang
+URL: http://classwork.engr.oregonstate.edu:4932 
+
+1. OVERVIEW
+The Beaver Fest Managment System is a web-based database management system designed 
+to coordinate bands, venues, managers, and sponsors. The application allows 
+administrators to schedule performances via a Many-to-Many relationship and 
+manage festival logistics through a full suite of CRUD operations.
+
+2. Tech Stack
+Backend: Node.js / Express
+Frontend: Handlebars (HBS), CSS3
+Database: MySQL (MariaDB)
+Dependencies: express, express-handlebars, mysql
+
+3. Citations
+Citation for use of AI tools for our style.css: 
+    Date: 03/15/2026 
+    Prompt used to generate this CSS file:  
+    [I need to spruce up my webpage using basic CSS. Help me create a simple and clean style for my webpage. I want to use a modern font, a light background color, and some subtle colors for headings and links. Also, please make sure the tables and forms look nice and are easy to read.] 
+    AI Source Link: gemini.google.com 
+Citation for db-connector.js and app.js: 
+    Date Retrieved: February 10, 2026 
+    Adapted From: CS340 Starter Application 
+    Type: Source Code 
+    Author: Oregon State University CS340 Course Staff 
+    Source: https://canvas.oregonstate.edu 
+    Notes: These files were adapted from the CS340 starter application provided through Canvas. Additional CRUD routes and functionality were implemented by our team. 
+Citation for use of AI tools for debugging performances.hbs: 
+    Date: 03/14/2026 
+    Prompt used to debug and rewrite the Delete and Update routes for the performances page:  
+    [Help me debug and rewrite my Delete and Update routes for my performances page.  
+    I want to make sure that when I click the delete button, it correctly deletes the performance from the database, and when I click the edit button, it takes me to a form where I can update the performance details.] 
+    AI Source Link: gemini.google.com 
